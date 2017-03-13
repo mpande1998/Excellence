@@ -1,6 +1,6 @@
 function Population() {
   this.rockets = [];
-  this.popSize = 25;
+  this.popSize = 50;
   this.matingPool = [];
 
   for (var i = 0; i < this.popSize; i++) {
@@ -23,6 +23,16 @@ function Population() {
     for (var i = 0; i < this.popSize; i++) {
       this.rockets[i].fitness /= maxFitness;
     }
+
+    var normalizedFitnessArray = [];
+    for (var i = 0; i < this.popSize; i++) {
+      normalizedFitnessArray.push(this.rockets[i].fitness);
+    }
+    this.meanFitness = 0;
+    for (var i = 0; i < normalizedFitnessArray.length; i++) {
+      this.meanFitness += normalizedFitnessArray[i];
+    }
+    this.meanFitness /= normalizedFitnessArray.length;
 
     this.matingPool = [];
     for (var i = 0; i < this.popSize; i++) {

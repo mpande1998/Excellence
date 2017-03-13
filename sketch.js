@@ -1,8 +1,8 @@
 var popul;
-var lifespan = 400;
+var lifespan = 300;
 var length = 0;
 var force = 0.2;
-var fitnessP;
+var lengthP;
 var target;
 var objectX = 100;
 var objectY = 200;
@@ -14,13 +14,13 @@ function setup() {
 
   popul = new Population();
   target = createVector(width/2, 50);
-  fitnessP = createP();
+  lengthP = createP();
 }
 
 function draw() {
   background(0);
   popul.run();
-  fitnessP.html(length);
+  lengthP.html(length);
   length++;
 
   rect(objectX, objectY, objectWidth, objectHeight);
@@ -28,6 +28,8 @@ function draw() {
   if(length == lifespan) {
     popul.evaluate();
     popul.selection();
+    var meanFitnessP = createP();
+    meanFitnessP.html("Fitness: " + popul.meanFitness);
     length = 0;
   }
 

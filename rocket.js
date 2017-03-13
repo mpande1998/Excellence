@@ -19,15 +19,22 @@ function Rocket(dna) {
   this.calcFitness = function() {
     var d = dist(this.pos.x, this.pos.y, target.x, target.y);
     if (d == 0) {
-      this.fitness = 10000;
+      this.fitness = 1;
     } else {
       this.fitness = 1/d;
     }
+
+    if (this.pos.y < objectY - objectHeight) {
+      this.fitness *= 3;
+    }
+    else if (d > 10 && d < 30) {
+      this.fitness *= 6;
+    }
     if (this.completed) {
-      this.fitness *= 20;
+      this.fitness *= 10;
     }
     if (this.crashed) {
-      this.fitness /= 20;
+      this.fitness /= 10;
     }
   }
 
