@@ -1,34 +1,34 @@
 function Population() {
   this.rockets = [];
-  this.popsize = 25;
-  this.matingpool = [];
+  this.popSize = 25;
+  this.matingPool = [];
 
-  for (var i = 0; i < this.popsize; i++) {
+  for (var i = 0; i < this.popSize; i++) {
     this.rockets.push(new Rocket());
   }
 
   this.evaluate = function() {
-    var maxfitness = 0;
+    var maxFitness = 0;
 
-    for (var i = 0; i < this.popsize; i++) {
+    for (var i = 0; i < this.popSize; i++) {
       this.rockets[i].calcFitness();
     }
 
-    for (var i = 0; i < this.popsize; i++) {
-      if (this.rockets[i].fitness > maxfitness) {
-        maxfitness = this.rockets[i].fitness;
+    for (var i = 0; i < this.popSize; i++) {
+      if (this.rockets[i].fitness > maxFitness) {
+        maxFitness = this.rockets[i].fitness;
       }
     }
 
-    for (var i = 0; i < this.popsize; i++) {
-      this.rockets[i].fitness /= maxfitness;
+    for (var i = 0; i < this.popSize; i++) {
+      this.rockets[i].fitness /= maxFitness;
     }
 
-    this.matingpool = [];
-    for (var i = 0; i < this.popsize; i++) {
+    this.matingPool = [];
+    for (var i = 0; i < this.popSize; i++) {
       var fit = this.rockets[i].fitness * 100;
       for (var j = 0; j < fit; j++) {
-        this.matingpool.push(this.rockets[i]);
+        this.matingPool.push(this.rockets[i]);
       }
     }
   }
@@ -36,9 +36,9 @@ function Population() {
   this.selection = function() {
     var newRockets = [];
     for (var i = 0; i < this.rockets.length; i++) {
-      var firstparent = random(this.matingpool).dna;
-      var secondparent = random(this.matingpool).dna;
-      var child = firstparent.crossover(secondparent);
+      var firstParent = random(this.matingPool).dna;
+      var secondParent = random(this.matingPool).dna;
+      var child = firstParent.crossover(secondParent);
       child.mutation();
       newRockets.push(new Rocket(child));
     }
@@ -46,7 +46,7 @@ function Population() {
   }
 
   this.run = function() {
-    for (var i = 0; i < this.popsize; i++) {
+    for (var i = 0; i < this.popSize; i++) {
       this.rockets[i].update();
       this.rockets[i].show();
     }
