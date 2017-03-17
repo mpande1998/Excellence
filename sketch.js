@@ -28,8 +28,6 @@ function draw() {
   if(length == lifespan) {
     popul.evaluate();
     popul.selection();
-    var meanFitnessP = createP();
-    meanFitnessP.html("Fitness: " + popul.meanFitness);
     length = 0;
   }
 
